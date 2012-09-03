@@ -10,7 +10,7 @@ on early-init
     mkdir /storage/usbdisk0 0775 system system
     mkdir /efs 0771 radio system
     mkdir /preload 0771 system system
-	mkdir /mnt 0775 root system
+    mkdir /mnt 0775 root system
     mkdir /mnt/.lfs 0755 root root
 
     # for backwards compatibility
@@ -125,7 +125,7 @@ on post-fs-data
     chmod 0600 /dev/pn544
     chown nfc nfc /dev/pn544
 	
-   #permissions for dpram
+#permissions for dpram
     chmod 0666 /dev/dpram0
     chmod 0666 /dev/dpram1
     chmod 0666 /dev/dpramerr
@@ -142,7 +142,7 @@ on post-fs-data
     chmod 0770 /dev/snd/timer
     chmod 0770 /dev/snd/hwC0D0
 
-    # create log system
+# create log system
     mkdir /data/log 0775 system log
     chown system log /data/log
 
@@ -154,7 +154,7 @@ on post-fs-data
     chown system system /data/pxtmpdir
     chmod 0775 /data/pxtmpdir
 
-    # permission for HDMI audio path
+# permission for HDMI audio path
     chown media audio /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
 
 # Permissions for gpio_keys.
@@ -468,18 +468,13 @@ service iprenew_uwbr0 /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
-	
+
+# GPS	
 service gpsd /system/bin/gpsd
     class main
     user system
     group system inet
 	
-service gpsfix /system/bin/gpsfix
-    class main
-    user root
-    group root
-    oneshot
-
 # for bluetooth
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --no2bytes --tosleep 50000 \
     --baudrate 3000000 --use_baudrate_for_download --patchram /system/bin/bcm4330B1.hcd \
