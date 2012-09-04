@@ -11,3 +11,4 @@
 /sdcard1	vfat		/dev/block/cyasblkdevblk0p1 /dev/block/cyasblkdevblk0
 /sdcard0	vfat		/dev/block/mmcblk0p11
 
+/sdcard    	datamedia   	/dev/null
