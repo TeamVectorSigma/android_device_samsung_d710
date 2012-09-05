@@ -6,8 +6,8 @@ on init
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export ANDROID_CACHE /cache
-    export SECONDARY_STORAGE /sdcard0
-    export EXTERNAL_STORAGE /sdcard1
+    export SECONDARY_STORAGE /sdcard
+    export EXTERNAL_STORAGE /extSdCard
 
     #symlink /system/etc /etc
 
