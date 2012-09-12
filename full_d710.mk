@@ -26,7 +26,7 @@ $(call inherit-product, device/samsung/d710/d710.mk)
 
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := cna_d710
+PRODUCT_NAME := full_d710
 PRODUCT_DEVICE := d710
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
