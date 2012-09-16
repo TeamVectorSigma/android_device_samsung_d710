@@ -59,9 +59,11 @@ def WriteFullOTAPackage(input_zip, output_zip):
       info_dict=OPTIONS.info_dict)
 
   AppendAssertions(script, input_zip)
-  device_specific.FullOTA_Assertions()
+  device_specific.FullOTA_Assertions()  
   if OPTIONS.backuptool:
+    script.Mount("/system")
     script.RunBackup("backup")
+    script.Unmount("/system")
 
   script.ShowProgress(0.5, 0)
 
@@ -74,15 +76,10 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.UnpackPackageDir("recovery", "/system")
   script.UnpackPackageDir("system", "/system")
 
-  (symlinks, retouch_files) = CopySystemFiles(input_zip, output_zip)
+  symlinks = CopySystemFiles(input_zip, output_zip)
   script.MakeSymlinks(symlinks)
-  if OPTIONS.aslr_mode:
-    script.RetouchBinaries(retouch_files)
-  else:
-    script.UndoRetouchBinaries(retouch_files)
 
   CopyBootFiles(input_zip, output_zip)
-
   Item.GetMetadata(input_zip)
   Item.Get("system").SetPermissions(script)
 
@@ -108,7 +105,7 @@ ota_from_target_files.WriteFullOTAPackage = WriteFullOTAPackage
 
 
 def WriteIncrementalOTAPackage(target_zip, source_zip, output_zip):
-    print "Incremental OTA Packages are not support on the d710 at this time"
+    print "Incremental OTA Packages are not support on the galaxys2 at this time"
     sys.exit(1)
 ota_from_target_files.WriteIncrementalOTAPackage = WriteIncrementalOTAPackage
 
