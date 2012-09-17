@@ -202,7 +202,6 @@ TARGET_HAL_PATH := hardware/samsung/exynos4/hal
 TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
 
 PRODUCT_COPY_FILES += \
-	device/samsung/d710/dhd.ko:root/lib/modules/dhd.ko
     device/samsung/d710/configs/secomxregistry:system/etc/secomxregistry
 
 PRODUCT_PACKAGES += \
