@@ -87,7 +87,7 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/samsung/galaxys2-common/configs/asound.conf:system/etc/asound.conf
+    device/samsung/d710/configs/asound.conf:system/etc/asound.conf
     	
 # Misc	
 PRODUCT_COPY_FILES += \
@@ -125,7 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	   
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=14 \
+    ro.config.vc_call_vol_steps=10\
     ro.telephony.default_network=4 \
     ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
