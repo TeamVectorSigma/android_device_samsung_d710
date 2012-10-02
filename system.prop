@@ -8,6 +8,6 @@ ro.sf.lcd_density=240
 dalvik.vm.heapsize=64m
 
 # notify vold we have internal and external sd
-ro.vold.switchablepair=/mnt/sdcard,/mnt/external_sd
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc
 persist.sys.vold.switchexternal=0
 

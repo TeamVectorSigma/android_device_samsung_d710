@@ -125,7 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	   
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=8\
+    ro.config.vc_call_vol_steps=6\
     ro.telephony.default_network=4 \
     ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
