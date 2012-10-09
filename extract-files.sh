@@ -88,12 +88,11 @@ adb pull /system/lib/libGLESv1_CM.so ../../../vendor/$MANUFACTURER/$COMMON/propr
 adb pull /system/lib/libGLESv2.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libGLESv2.so
 adb pull /system/lib/libGLESv2_dbg.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libGLESv2_dbg.so
 adb pull /system/lib/libion.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libion.so
-adb pull /system/lib/libsecion.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libsecion.so
 adb pull /system/lib/libMali.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libMali.so
 adb pull /system/lib/libUMP.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libUMP.so
 
 # HWCOMPOSER
-adb pull /system/lib/hw/hwcomposer.smdk4210.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/hwcomposer.smdk4210.so
+adb pull /system/lib/hw/hwcomposer.exynos4.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/hwcomposer.exynos4.so
 adb pull /system/bin/bintvoutservice ../../../vendor/$MANUFACTURER/$COMMON/proprietary/bintvoutservice
 adb pull /system/lib/libcec.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libcec.so
 adb pull /system/lib/libddc.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libddc.so
@@ -145,7 +144,6 @@ adb pull /system/lib/libcaps.so ../../../vendor/$MANUFACTURER/$COMMON/proprietar
 adb pull /system/lib/libs5pjpeg.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libs5pjpeg.so
 adb pull /system/cameradata/datapattern_420sp.yuv ../../../vendor/$MANUFACTURER/$COMMON/proprietary/datapattern_420sp.yuv
 adb pull /system/cameradata/datapattern_front_420sp.yuv ../../../vendor/$MANUFACTURER/$COMMON/proprietary/datapattern_front_420sp.yuv
-
 
 # SENSORS
 adb pull /system/lib/libakm.so ../../../vendor/$MANUFACTURER/$COMMON/proprietary/libakm.so
@@ -307,13 +305,12 @@ PRODUCT_COPY_FILES += \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libGLESv2.so:system/lib/libGLESv2.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libGLESv2_dbg.so:system/lib/libGLESv2_dbg.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libion.so:system/lib/libion.so \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/libsecion.so:system/lib/libsecion.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libMali.so:system/lib/libMali.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libUMP.so:system/lib/libUMP.so
 
 # HWCOMPOSER
 PRODUCT_COPY_FILES += \\
-    vendor/__MANUFACTURER__/__COMMON__/proprietary/hwcomposer.smdk4210.so:system/lib/hw/hwcomposer.smdk4210.so \\
+    vendor/__MANUFACTURER__/__COMMON__/proprietary/hwcomposer.exynos4.so:system/lib/hw/hwcomposer.exynos4.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/bintvoutservice:system/bin/bintvoutservice \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libcec.so:system/lib/libcec.so \\
     vendor/__MANUFACTURER__/__COMMON__/proprietary/libddc.so:system/lib/libddc.so \\

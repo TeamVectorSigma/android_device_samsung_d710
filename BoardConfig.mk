@@ -78,7 +78,7 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/re
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/galaxys2-common/releasetools/galaxys2_img_from_target_files
 
 # Graphics
-BOARD_EGL_CFG := device/samsung/d710/configs/egl.cfg
+BOARD_EGL_CFG := device/samsung/galaxys2-common/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 EGL_ALWAYS_ASYNC := true
 
@@ -88,7 +88,7 @@ ENABLE_WEBGL := true
 # Charging mode
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 BOARD_BATTERY_DEVICE_NAME := "battery"
-BOARD_CHARGER_RES := device/samsung/d710/res/charger
+BOARD_CHARGER_RES := device/samsung/galaxys2-common/res/charger
 
 BOARD_SUPPRESS_EMMC_WIPE := true
 
@@ -106,8 +106,6 @@ BOARD_USES_PROPRIETARY_LIBFIMC := true
 #BOARD_USES_SAMSUNG_HDMI := true
 
 # OMX
-BOARD_USE_SAMSUNG_COLORFORMAT := true
-BOARD_FIX_NATIVE_COLOR_FORMAT := true
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CODEC_SUPPORT
 BOARD_NONBLOCK_MODE_PROCESS := true
@@ -124,7 +122,6 @@ COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB
 # Camera
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CAMERA_HARDWARE
 BOARD_USES_PROPRIETARY_LIBCAMERA := true
-BOARD_USES_PROPRIETARY_LIBFIMC := true
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 DISABLE_HW_ID_MATCH_CHECK := true
 
@@ -165,7 +162,7 @@ ICS_AUDIO_BLOB := true
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/d710/recovery/graphics.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/galaxys2-common/recovery/graphics.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USES_MMCUTILS := true
