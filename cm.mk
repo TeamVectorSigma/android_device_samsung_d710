@@ -20,6 +20,9 @@ $(call inherit-product, vendor/cna/config/cdma.mk)
 # Release name
 PRODUCT_RELEASE_NAME := SPH-D710
 
+# Bootanimation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cna/config/common_full_phone.mk)

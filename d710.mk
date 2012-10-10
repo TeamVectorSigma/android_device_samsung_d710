@@ -12,13 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include common makefile
-#$(call inherit-product, device/samsung/galaxys2-common/common.mk)
-
 LOCAL_PATH := device/samsung/d710
 
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay \
-	device/samsung/galaxys2-common/overlay
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 		
 # Init files
 PRODUCT_COPY_FILES += \
@@ -87,18 +83,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     $(LOCAL_PATH)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc 
-
-# Audio
-PRODUCT_COPY_FILES += \
-    device/samsung/galaxys2-common/configs/asound.conf:system/etc/asound.conf
-    	    	
+    	
 # Misc	
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
-
-# Bluetooth configuration files
-PRODUCT_COPY_FILES += \
-    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
 	
 # Vold
 PRODUCT_COPY_FILES += \
@@ -128,7 +116,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	   
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=8\
     ro.telephony.default_network=4 \
     ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
@@ -163,10 +150,6 @@ PRODUCT_PACKAGES := \
 # Camera
 PRODUCT_PACKAGES += \
     camera.exynos4
-	
-PRODUCT_COPY_FILES += \
-    device/samsung/galaxys2-common/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    device/samsung/galaxys2-common/configs/media_codecs.xml:system/etc/media_codecs.xml
 	
 # Charger
 PRODUCT_PACKAGES += \
@@ -253,6 +236,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += hdpi
+
+
+# Include common makefile
+$(call inherit-product, device/samsung/galaxys2-common/common.mk)
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
