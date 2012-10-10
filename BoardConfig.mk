@@ -17,6 +17,9 @@
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
+-include device/samsung/galaxys2-common/BoardCommonConfig.mk
+
+
 USE_CAMERA_STUB := true
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_LIBSECRIL_STUB := true

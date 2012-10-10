@@ -7,7 +7,7 @@ rild.libargs=-d /dev/ttyS0
 ro.sf.lcd_density=240
 dalvik.vm.heapsize=64m
 
-# notify vold we have internal and external sd
-ro.vold.switchablepair=/mnt/sdcard,/mnt/external_sd
+# notify vold we have internal, emmc and external sd, sdcard
+ro.vold.switchablepair=/mnt/emmc,/mnt/sdcard
 persist.sys.vold.switchexternal=0
 
