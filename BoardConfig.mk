@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011 The Android Open-Source Project
+# Copyright (C) 2013 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
--include device/samsung/galaxys2-common/BoardCommonConfig.mk
+#-include device/samsung/galaxys2-common/BoardCommonConfig.mk
 
 
 USE_CAMERA_STUB := true
@@ -40,6 +40,7 @@ TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 EXYNOS4210_ENHANCEMENTS := true
+BOARD_USES_SKTEXTBOX := true
 
 ifdef EXYNOS4210_ENHANCEMENTS
 COMMON_GLOBAL_CFLAGS += -DEXYNOS4_ENHANCEMENTS
@@ -109,6 +110,8 @@ BOARD_USES_PROPRIETARY_LIBFIMC := true
 #BOARD_USES_SAMSUNG_HDMI := true
 
 # OMX
+BOARD_USE_SAMSUNG_COLORFORMAT := true
+BOARD_FIX_NATIVE_COLOR_FORMAT := true
 BOARD_HAVE_CODEC_SUPPORT := SAMSUNG_CODEC_SUPPORT
 COMMON_GLOBAL_CFLAGS += -DSAMSUNG_CODEC_SUPPORT
 BOARD_NONBLOCK_MODE_PROCESS := true
