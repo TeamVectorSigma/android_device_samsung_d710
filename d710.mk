@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Include common makefile
-$(call inherit-product, device/samsung/galaxys2-common/common.mk)
+#$(call inherit-product, device/samsung/galaxys2-common/common.mk)
 
 LOCAL_PATH := device/samsung/d710
 
