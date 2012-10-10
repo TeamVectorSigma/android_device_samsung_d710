@@ -87,10 +87,18 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     $(LOCAL_PATH)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc 
-    	
+
+# Audio
+PRODUCT_COPY_FILES += \
+    device/samsung/galaxys2-common/configs/asound.conf:system/etc/asound.conf
+    	    	
 # Misc	
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
+
+# Bluetooth configuration files
+PRODUCT_COPY_FILES += \
+    system/bluetooth/data/main.le.conf:system/etc/bluetooth/main.conf
 	
 # Vold
 PRODUCT_COPY_FILES += \
@@ -155,6 +163,10 @@ PRODUCT_PACKAGES := \
 # Camera
 PRODUCT_PACKAGES += \
     camera.exynos4
+	
+PRODUCT_COPY_FILES += \
+    device/samsung/galaxys2-common/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    device/samsung/galaxys2-common/configs/media_codecs.xml:system/etc/media_codecs.xml
 	
 # Charger
 PRODUCT_PACKAGES += \
