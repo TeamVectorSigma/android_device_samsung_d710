@@ -7,18 +7,17 @@ on init
     export ANDROID_DATA /data
     export ANDROID_CACHE /cache
     export SECONDARY_STORAGE /sdcard
-    export EXTERNAL_STORAGE /emmc
+    export EXTERNAL_STORAGE /external_sd
 
     #symlink /system/etc /etc
 
-    mkdir /emmc
     mkdir /sdcard
+    mkdir /external_sd
     mkdir /usbdisk
     mkdir /system
     mkdir /data
     mkdir /cache
     mkdir /preload
-    mkdir /tmp
     mount /tmp /tmp tmpfs
 
 on boot
