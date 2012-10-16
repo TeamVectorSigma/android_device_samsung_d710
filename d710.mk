@@ -19,36 +19,14 @@ DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 # Init files
 PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
-    $(LOCAL_PATH)/init.smdk4210.gps.rc:root/init.smdk4210.gps.rc \
+    $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
-    frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
-    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml 
-	
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
@@ -85,10 +63,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     $(LOCAL_PATH)/usr/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     $(LOCAL_PATH)/usr/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc 
-    	
-# Misc	
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 	
 # Vold
 PRODUCT_COPY_FILES += \
@@ -96,7 +70,44 @@ PRODUCT_COPY_FILES += \
 
 # WiFi
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf 
+    $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/ip-up:system/etc/ppp/ip-up \
+    $(LOCAL_PATH)/configs/ip-down:system/etc/ppp/ip-down
+
+# Gps
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
+
+# Packages
+PRODUCT_PACKAGES := \
+    GalaxyS2Settings \
+    smdk4210_hdcp_keys
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.exynos4
+	
+# WIMAX
+PRODUCT_PACKAGES += \
+    WiMAXSettings \
+    SprintMenu \
+    WiMAXHiddenMenu \
+    SystemUpdateUI
+
+PRODUCT_PACKAGES += \
+    libhwconverter \
+    libs5pjpeg \
+    libfimg
+
+# Screen density is actually considered a locale (since it is taken into account
+# the the build-time selection of resources). The product definitions including
+# this file must pay attention to the fact that the first entry in the final
+# PRODUCT_LOCALES expansion must not be a density.
+# This device is hdpi.
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_LOCALES += hdpi
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
@@ -118,8 +129,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.service.usb.setting=0 \
     persist.service.adb.enable=1 \
-    persist.sys.usb.config=mass_storage,adb
-	   
+    persist.sys.usb.config=mass_storage,adb \
+    persist.service.usb.hubport=4	   
+
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=4 \
@@ -131,89 +143,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.cdma.datalinkinterface=/dev/ttyCDMA0 \
     net.interfaces.defaultroute=cdma \
     net.cdma.ppp.interface=ppp0 \
-    ro.cdma.ppp.interface=ppp0 \
     ro.wimax.interface=uwbr0 \
     net.connectivity.type=CDMA1 \
     mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
     ro.telephony.ril_class=SamsungCDMAv6RIL \
     ro.ril.samsung_cdma=true \
-    ro.carrier=Sprint	
-	
-# Gps
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
-
-# Packages
-PRODUCT_PACKAGES := \
-    TvOut \
-    audio.a2dp.default \
-    com.android.future.usb.accessory \
-    smdk4210_hdcp_keys \
-    GalaxyS2Settings \
-    SamsungServiceMode \
-    libsurfaceflinger_client \
-    Torch
-	
-# Camera
-PRODUCT_PACKAGES += \
-    camera.exynos4
-	
-# Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
-
-# Sensors
-PRODUCT_PACKAGES += \
-    lights.exynos4 \
-    sensors.exynos4
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    static_busybox \
-    make_ext4fs \
-    setup_fs
-	
-# WIMAX
-PRODUCT_PACKAGES += \
-    WiMAXSettings \
-    SprintMenu \
-    WiMAXHiddenMenu \
-    SystemUpdateUI
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.wimax.interface=uwbr0 \
-    persist.service.usb.hubport=4
-	
-# MFC API
-PRODUCT_PACKAGES += \
-    libsecmfcapi
-	
-# Include exynos4 platform specific parts
-TARGET_HAL_PATH := hardware/samsung/exynos4/hal
-TARGET_OMX_PATH := hardware/samsung/exynos/multimedia/openmax
-
-PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libseccscapi \
-    libsecbasecomponent \
-    libsecosal \
-    libSEC_OMX_Resourcemanager \
-    libSEC_OMX_Core \
-    libSEC_OMX_Vdec \
-    libOMX.SEC.AVC.Decoder \
-    libOMX.SEC.M4V.Decoder \
-    libOMX.SEC.WMV.Decoder \
-    libOMX.SEC.VP8.Decoder \
-    libSEC_OMX_Venc \
-    libOMX.SEC.AVC.Encoder \
-    libOMX.SEC.M4V.Encoder \
-    libSEC_OMX_Adec \
-    libOMX.SEC.MP3.Decoder \
-    libhwconverter \
-    libs5pjpeg \
-    libfimg
+    ro.carrier=Sprint
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -234,24 +169,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # enable repeatable keys in cwm
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.enable_key_repeat=true
-
-# Screen density is actually considered a locale (since it is taken into account
-# the the build-time selection of resources). The product definitions including
-# this file must pay attention to the fact that the first entry in the final
-# PRODUCT_LOCALES expansion must not be a density.
-# This device is hdpi.
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
-PRODUCT_LOCALES += hdpi
-
+    ro.cwm.enable_key_repeat=true    
 
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
-
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
-$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
-$(call inherit-product, hardware/samsung/exynos4210.mk)

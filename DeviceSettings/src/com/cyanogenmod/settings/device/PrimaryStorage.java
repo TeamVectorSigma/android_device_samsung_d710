@@ -26,6 +26,8 @@ import android.preference.Preference;
 import android.preference.ListPreference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
 
 public class PrimaryStorage extends ListPreference implements OnPreferenceChangeListener {
 
@@ -47,19 +49,32 @@ public class PrimaryStorage extends ListPreference implements OnPreferenceChange
      */
     public static void restore(Context context) {
         if (!isSupported()) {
-        Log.v(TAG, "No storage.rc file found, creating.");
-        Utils.newFile(FILE,"export EXTERNAL_STORAGE /mnt/external_sd" + System.getProperty( "line.separator" ));
+            Log.v(TAG, "No storage.rc file found, creating.");
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);
         } else { 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        Log.v(TAG, "Loading preference file, Primary storage is" + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd"));
-        Utils.newFile(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "/mnt/external_sd") + System.getProperty( "line.separator" ));
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+            Log.v(TAG, "Loading preference file, Primary storage is " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0"));
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE " + sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0") + System.getProperty( "line.separator" ), false);
+            if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0").equals("sdcard1")) {
+                Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
+            } else if (sharedPrefs.getString(DeviceSettings.KEY_PRIMARY_STORAGE, "sdcard0").equals("sdcard0")) {
+                Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
+            }
         }
         }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.v(TAG, "Setting Primary Storage to" + newValue.toString());
-        Utils.newFile(FILE,"export EXTERNAL_STORAGE " + newValue.toString() + System.getProperty( "line.separator" ));
-        return true;
-    }
+        Log.v(TAG, "Setting Primary Storage to " + (String) newValue );
+        if (newValue.equals("sdcard1")) {
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), true);
+        } else if (newValue.equals("sdcard0")) {
+            Utils.writeValue(FILE,"export EXTERNAL_STORAGE /storage/sdcard0" + System.getProperty( "line.separator" ), false);
+            Utils.writeValue(FILE,"export SECONDARY_STORAGE /storage/sdcard1" + System.getProperty( "line.separator" ), true);       
+        }
+          /**  Utils.showDialog((Context)this, "Reboot Required!", "Reboot required before changes will take effect!"); **/
+            return true;
+        }
 
 }
