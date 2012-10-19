@@ -21,6 +21,8 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
     $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
     $(LOCAL_PATH)/init.rc:root/init.rc \
+    $(LOCAL_PATH)/init.bt.rc:root/init.bt.rc \
+    $(LOCAL_PATH)/fstab.smdk4210:root/fstab.smdk4210 \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
@@ -76,6 +78,9 @@ PRODUCT_COPY_FILES += \
 
 # Gps
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/Volume.db:system/etc/Volume.db \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
 
@@ -145,7 +150,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     net.cdma.ppp.interface=ppp0 \
     ro.wimax.interface=uwbr0 \
     net.connectivity.type=CDMA1 \
-    mobiledata.interfaces=ppp0,wlan0,uwbr0,p2p0 \
+    mobiledata.interfaces=ppp0,wlan0,uwbr0 \
     ro.telephony.ril_class=SamsungCDMAv6RIL \
     ro.ril.samsung_cdma=true \
     ro.carrier=Sprint
