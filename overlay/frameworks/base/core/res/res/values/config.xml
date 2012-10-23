@@ -282,8 +282,7 @@
         <item>6</item>
         <item>5</item>
     </integer-array>
-	
-	    <!-- Set and Unsets WiMAX -->
+    <!-- Set and Unsets WiMAX -->
     <bool name="config_wimaxEnabled">true</bool>
     <!-- Location of the wimax framwork jar location -->
     <string name="config_wimaxServiceJarLocation">/system/framework/wimax.jar</string>
