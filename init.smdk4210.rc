@@ -440,11 +440,6 @@ on property:ril.cdma.data_state=0
     setprop status.battery.level_raw  50
     setprop status.battery.level_scale 9
 
-service DR-deamon /system/bin/drexe
-    class main
-    user root
-    group system radio inet net_raw
-
 # for bluetooth
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --no2bytes --tosleep 50000 \
     --baudrate 3000000 --use_baudrate_for_download --patchram /system/bin/bcm4330B1.hcd \

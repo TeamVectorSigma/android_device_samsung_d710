@@ -178,4 +178,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
-$(call inherit-product-if-exists, vendor/samsung/galaxys2-common/common-vendor.mk)

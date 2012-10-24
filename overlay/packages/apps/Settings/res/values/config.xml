@@ -26,5 +26,4 @@
 
     <!-- Dock settings -->
     <bool name="has_dock_settings">true</bool>
-
 </resources>
