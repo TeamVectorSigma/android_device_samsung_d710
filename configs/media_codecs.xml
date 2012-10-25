@@ -77,10 +77,10 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-        <MediaCodec name="OMX.SEC.avc.dec" type="video/avc" >
+        <MediaCodec name="OMX.SEC.AVC.Decoder" type="video/avc" >
             <Quirk name="decoder-ignores-streamcorrupt-error" />
         </MediaCodec>	    	
-        <MediaCodec name="OMX.SEC.mpeg4.dec" type="video/mp4v-es" >
+        <MediaCodec name="OMX.SEC.MPEG4.Decoder" type="video/mp4v-es" >
             <Quirk name="decoder-ignores-streamcorrupt-error" />	
         </MediaCodec>	    
         <MediaCodec name="OMX.SEC.h263.dec" type="video/3gpp" >
@@ -92,7 +92,7 @@ Only the three quirks included above are recognized at this point:
         <MediaCodec name="OMX.SEC.vc1.dec" type="video/x-ms-wmv" >
             <Quirk name="decoder-ignores-streamcorrupt-error" />	
         </MediaCodec>	    
-        <MediaCodec name="OMX.SEC.avcdec" type="video/avc" >
+        <MediaCodec name="OMX.SEC.AVC.Decoder" type="video/avc" >
             <Quirk name="decoder-ignores-streamcorrupt-error" />	
         </MediaCodec>	    
         <MediaCodec name="OMX.SEC.rv.dec" type="video/rv" >
@@ -181,9 +181,9 @@ Only the three quirks included above are recognized at this point:
     </Decoders>
 
     <Encoders>
-        <MediaCodec name="OMX.SEC.mpeg4.enc" type="video/mp4v-es" />
+        <MediaCodec name="OMX.SEC.MPEG4.Encoder" type="video/mp4v-es" />
         <MediaCodec name="OMX.SEC.h263.enc" type="video/3gpp" />
-        <MediaCodec name="OMX.SEC.avc.enc" type="video/avc" />
+        <MediaCodec name="OMX.SEC.AVC.Encoder" type="video/avc" />
 
         <MediaCodec name="OMX.SEC.aac.enc" type="audio/mp4a-latm" />
 
