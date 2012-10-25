@@ -6,6 +6,7 @@
 
 import /init.${ro.hardware}.rc
 import /init.cm.rc
+import /init.trace.rc
 
 on early-init
 
