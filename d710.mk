@@ -76,8 +76,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ip-down:system/etc/ppp/ip-down
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/Volume.db:system/etc/Volume.db \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf \
@@ -176,6 +174,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # enable repeatable keys in cwm
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cwm.enable_key_repeat=true
+
+$(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
 
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
