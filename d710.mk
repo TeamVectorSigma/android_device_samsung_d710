@@ -14,7 +14,7 @@
 
 LOCAL_PATH := device/samsung/d710
 
-DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+# DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 # Init files
 PRODUCT_COPY_FILES := \
@@ -179,4 +179,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, vendor/samsung/d710/d710-common-dupes.mk)
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
+DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)

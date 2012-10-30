@@ -60,6 +60,10 @@ EXYNOS4210_ENHANCEMENTS := true
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710,smdk4210
 
+NEW_COMMON_GLOBAL_CFLAGS := $(subst -DICS_AUDIO_BLOB,,$(COMMON_GLOBAL_CFLAGS))
+
+COMMON_GLOBAL_CFLAGS := $(NEW_COMMON_GLOBAL_CFLAGS)
+
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/d710/BoardConfigVendor.mk
 
