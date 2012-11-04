@@ -103,7 +103,7 @@ public class AudioService extends IAudioService.Stub implements OnFinished {
     private static final String TAG = "AudioService";
 
     /** Debug remote control client/display feature */
-    protected static final boolean DEBUG_RC = false;
+    protected static final boolean DEBUG_RC = true;
     /** Debug volumes */
     protected static final boolean DEBUG_VOL = true;
 
