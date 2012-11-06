@@ -7,11 +7,6 @@ on early-init
     mkdir /storage/sdcard0 0000 system system
     mkdir /storage/sdcard1 0000 system system
     mkdir /storage/usbdisk0 0000 system system
-    mkdir /storage/usbdisk1 0000 system system
-    mkdir /storage/usbdisk2 0000 system system
-    mkdir /storage/usbdisk3 0000 system system
-    mkdir /storage/usbdisk4 0000 system system
-    mkdir /storage/usbdisk5 0000 system system
     mkdir /efs 0771 radio system
     mkdir /mnt/.lfs 0755 root root
 
@@ -21,16 +16,6 @@ on early-init
     symlink /storage/sdcard1 /mnt/external_sd
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
-    symlink /storage/usbdisk1 /usbdisk1
-    symlink /storage/usbdisk1 /mnt/usbdisk1
-    symlink /storage/usbdisk2 /usbdisk2
-    symlink /storage/usbdisk2 /mnt/usbdisk2
-    symlink /storage/usbdisk3 /usbdisk3
-    symlink /storage/usbdisk3 /mnt/usbdisk3
-    symlink /storage/usbdisk4 /usbdisk4
-    symlink /storage/usbdisk4 /mnt/usbdisk4
-    symlink /storage/usbdisk5 /usbdisk5
-    symlink /storage/usbdisk5 /mnt/usbdisk5
 
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
@@ -269,6 +254,8 @@ on boot
     chmod 0660 /sys/class/backlight/pwm-backlight/brightness
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
     chmod 0660 /sys/devices/virtual/misc/melfas_touchkey/brightness
+
+# Permissions for LEDS
     chown system system /sys/class/leds/red/trigger
     chown system system /sys/class/leds/blue/trigger
     chmod 0644 /sys/class/leds/blue/trigger
