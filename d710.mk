@@ -85,6 +85,10 @@ PRODUCT_PACKAGES := \
     GalaxyS2Settings \
     smdk4210_hdcp_keys
 
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.exynos4
+
 # WIMAX
 PRODUCT_PACKAGES += \
     WiMAXSettings \
