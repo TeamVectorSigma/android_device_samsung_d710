@@ -381,7 +381,7 @@ on boot
 
 # test for scheduler
     chown system system /sys/block/mmcblk0/queue/scheduler
-    chmod 0664 /sys/block/mmcblk0/queue/scheduler
+    chmod 0775 /sys/block/mmcblk0/queue/scheduler
 
     setprop ro.FOREGROUND_APP_ADJ 0
     setprop ro.VISIBLE_APP_ADJ 1
