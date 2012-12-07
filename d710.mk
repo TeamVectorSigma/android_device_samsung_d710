@@ -81,14 +81,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
 
 # Packages
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
     GalaxyS2Settings \
     smdk4210_hdcp_keys
 
 # Needed Packages
 PRODUCT_PACKAGES := \
     Trebuchet
-
 
 # Sensors
 PRODUCT_PACKAGES += \
