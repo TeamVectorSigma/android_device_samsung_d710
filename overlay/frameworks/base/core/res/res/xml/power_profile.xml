@@ -24,10 +24,10 @@
     <item name="bluetooth.on">0.3</item>
     <item name="screen.full">380</item>
     <item name="wifi.on">0.3</item>
-    <item name="wifi.active">96</item>
-    <item name="wifi.scan">70</item>
+    <item name="wifi.active">86</item>
+    <item name="wifi.scan">60</item>
     <item name="dsp.audio">44</item>
-    <item name="dsp.video">280</item>
+    <item name="dsp.video">260</item>
     <item name="radio.active">250</item>
     <item name="radio.scanning">82</item>
     <item name="gps.on">1</item>

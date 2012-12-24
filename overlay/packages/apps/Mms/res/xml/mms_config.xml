@@ -30,8 +30,8 @@
     <bool name="enable_signature_settings">false</bool>
     <bool name="enable_vibration_option">true</bool>
     <bool name="enable_email_segmented_sms">true</bool>
-    <bool name="enable_signature">false</bool>
-    <bool name="enable_callback_option">false</bool>
+    <bool name="enable_signature">true</bool>
+    <bool name="enable_callback_option">true</bool>
     <bool name="SubjectSMS">true</bool>
     <bool name="International_SMS_Guard">true</bool>
 </mms_config>
