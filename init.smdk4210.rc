@@ -256,6 +256,8 @@ on boot
     chmod 0660 /sys/devices/virtual/misc/melfas_touchkey/brightness
 
 # Permissions for LEDS
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/blue/brightness
     chown system system /sys/class/leds/red/trigger
     chown system system /sys/class/leds/blue/trigger
 
