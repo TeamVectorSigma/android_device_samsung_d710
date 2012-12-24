@@ -3095,7 +3095,7 @@ public class AudioService extends IAudioService.Stub implements OnFinished {
                     synchronized (mBluetoothA2dpEnabledLock) {
                         AudioSystem.setForceUse(AudioSystem.FOR_MEDIA,
                                 mBluetoothA2dpEnabled ?
-                                        AudioSystem.FORCE_NONE : AudioSystem.FORCE_NO_BT_A2DP);
+                                        AudioSystem.FORCE_NONE);
                     }
                     // indicate the end of reconfiguration phase to audio HAL
                     AudioSystem.setParameters("restarting=false");
