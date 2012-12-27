@@ -262,6 +262,20 @@ on boot
     chown system system /sys/class/leds/blue/trigger
     chmod 0644 /sys/class/leds/blue/trigger
     chmod 0644 /sys/class/leds/red/trigger
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/red/device/grpfreq
+    chown system system /sys/class/leds/red/device/grppwm
+    chown system system /sys/class/leds/red/device/blink
+    chown system system /sys/class/leds/red/brightness
+    chown system system /sys/class/leds/green/brightness
+    chown system system /sys/class/leds/blue/brightness
+    chown system system /sys/class/leds/red/device/grpfreq
+    chown system system /sys/class/leds/red/device/grppwm
+    chown system system /sys/class/leds/red/device/blink
+    chmod 0644 /sys/class/leds/blue/brightness
+    chmod 0644 /sys/class/leds/red/brightness
 
 #panorama directory creation
     mkdir /data/pxtmpdir 0775
