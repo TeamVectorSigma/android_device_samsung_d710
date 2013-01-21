@@ -25,7 +25,7 @@ PRODUCT_COPY_FILES := \
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
-        
+
 # Keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
@@ -127,7 +127,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.call_ring.delay=0 \
-    ro.config.vc_call_vol_steps=11 \
+    ro.config.vc_call_vol_steps=9 \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
