@@ -277,6 +277,7 @@ on boot
     chmod 0644 /sys/class/leds/red/trigger
     chown system system /sys/class/leds/blue/trigger
     chmod 0644 /sys/class/leds/blue/trigger
+    chmod 0644 /sys/class/leds/red/trigger
 
 #panorama directory creation
     mkdir /data/pxtmpdir 0775
