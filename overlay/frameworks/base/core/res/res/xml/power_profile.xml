@@ -4,7 +4,7 @@
     <item name="screen.on">38</item>
     <item name="bluetooth.active">17</item>
     <item name="bluetooth.on">0.3</item>
-    <item name="screen.full">250</item>
+    <item name="screen.full">127</item>
     <item name="wifi.on">0.3</item>
     <item name="wifi.active">4</item>
     <item name="wifi.scan">44</item>
