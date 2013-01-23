@@ -4,7 +4,7 @@
     <item name="screen.on">22</item>
     <item name="bluetooth.active">17</item>
     <item name="bluetooth.on">0.3</item>
-    <item name="screen.full">127</item>
+    <item name="screen.full">88</item>
     <item name="wifi.on">0.3</item>
     <item name="wifi.active">4</item>
     <item name="wifi.scan">34</item>
@@ -25,16 +25,15 @@
       <value>1200000</value>
       <value>14000000</value>
     </array>
-  <item name="cpu.awake">2.2</item>
+    <item name="cpu.awake">0.4</item>
     <item name="cpu.idle">1.4</item>
     <array name="cpu.active">
-      <value>55.4</value>
-      <value>82.1</value>
-      <value>113.7</value>
+      <value>55.0</value>
+      <value>80.0</value>
+      <value>110.0</value>
       <value>140.0</value>
       <value>170.0</value>
       <value>200.0</value>
-      <value>230.0</value>
     </array>
     <item name="battery.capacity">1800</item>
 </device>

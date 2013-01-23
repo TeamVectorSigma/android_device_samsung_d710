@@ -128,26 +128,26 @@
         <item>255</item>
     </integer-array>
     <integer-array name="config_autoBrightnessButtonBacklightValues">
+        <item>19</item>
+        <item>23</item>
+        <item>26</item>
+        <item>30</item>
+        <item>34</item>
+        <item>39</item>
+        <item>45</item>
+        <item>51</item>
+        <item>59</item>
+        <item>67</item>
+        <item>77</item>
+        <item>88</item>
+        <item>101</item>
+        <item>116</item>
+        <item>133</item>
+        <item>152</item>
+        <item>174</item>
+        <item>199</item>
+        <item>228</item>
         <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>255</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
     </integer-array>
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
         <item>0</item>
@@ -205,6 +205,11 @@
     </integer-array>
     <!-- Set and Unsets WiMAX -->
     <bool name="config_wimaxEnabled">true</bool>
+    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveNotificationLed">true</bool>
+
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveBatteryLed">true</bool>
     <!-- Location of the wimax framwork jar location -->
     <string name="config_wimaxServiceJarLocation">/system/framework/wimax.jar</string>
     <!-- Location of the wimax native library locaiton -->

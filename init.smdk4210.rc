@@ -272,12 +272,11 @@ on boot
     chown radio system /sys/devices/virtual/misc/melfas_touchkey/brightness
     chmod 0660 /sys/devices/virtual/misc/melfas_touchkey/brightness
 
-# Permissions for LEDS
+# LED Light Triggers
     chown system system /sys/class/leds/red/trigger
     chmod 0644 /sys/class/leds/red/trigger
     chown system system /sys/class/leds/blue/trigger
     chmod 0644 /sys/class/leds/blue/trigger
-    chmod 0644 /sys/class/leds/red/trigger
 
 #panorama directory creation
     mkdir /data/pxtmpdir 0775
