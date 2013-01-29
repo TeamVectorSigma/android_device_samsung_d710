@@ -74,7 +74,7 @@
     <bool name="config_forceDisableHardwareKeyboard">true</bool>
     <bool name="config_noDelayInATwoDP">true</bool>
     <bool name="config_samsung_stk">true</bool>
-    <color name="config_defaultNotificationColor">#ffff0000</color>
+    <color name="config_defaultNotificationColor">#ffffffff</color>
     <integer name="config_defaultNotificationLedOn">1000</integer>
     <integer name="config_defaultNotificationLedOff">14000</integer>
     <integer name="config_notificationsBatteryLowARGB">0xFFFF00FF</integer>
@@ -125,29 +125,29 @@
         <item>174</item>
         <item>199</item>
         <item>228</item>
-        <item>255</item>
+        <item>250</item>
     </integer-array>
     <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>19</item>
-        <item>23</item>
-        <item>26</item>
-        <item>30</item>
-        <item>34</item>
-        <item>39</item>
-        <item>45</item>
-        <item>51</item>
-        <item>59</item>
-        <item>67</item>
-        <item>77</item>
-        <item>88</item>
-        <item>101</item>
-        <item>116</item>
-        <item>133</item>
-        <item>152</item>
-        <item>174</item>
-        <item>199</item>
-        <item>228</item>
-        <item>255</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
     </integer-array>
     <integer-array name="config_autoBrightnessKeyboardBacklightValues">
         <item>0</item>
@@ -171,7 +171,9 @@
         <item>0</item>
         <item>0</item>
     </integer-array>
-    <integer name="config_screenBrightnessDim">29</integer>
+
+    <!-- Minimum screen brightness allowed by the power manager. -->
+    <integer name="config_screenBrightnessDim">10</integer>
     <string-array translatable="false" name="networkAttributes">
         <item>"wifi,1,1,1,-1,true"</item>
         <item>"mobile,0,0,0,-1,true"</item>
