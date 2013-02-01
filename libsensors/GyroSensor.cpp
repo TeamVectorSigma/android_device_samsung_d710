@@ -66,9 +66,9 @@ int GyroSensor::setInitialState() {
         !ioctl(data_fd, EVIOCGABS(EVENT_TYPE_GYRO_X), &absinfo_z)) {
         value = absinfo_x.value;
         mPendingEvent.data[0] = value * CONVERT_GYRO_X;
-        value = absinfo_x.value;
+        value = absinfo_y.value;
         mPendingEvent.data[1] = value * CONVERT_GYRO_Y;
-        value = absinfo_x.value;
+        value = absinfo_z.value;
         mPendingEvent.data[2] = value * CONVERT_GYRO_Z;
         mHasPendingEvent = true;
     }
