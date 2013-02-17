@@ -10,8 +10,8 @@
     <int name="minMessageCountPerThread">10</int>
     <int name="maxMessageCountPerThread">5000</int>
     <int name="mMaxTextViewSize">5000</int>
-    <string name="uaProfUrl">http://device.sprintpcs.com/Samsung/SPH-D710/latest</string>
-    <string name="userAgent">SPH-D710/Android-mms</string>
+    <string name="uaProfUrl">http://uaprof.vtext.com/sam/i515/i515.xml</string>
+    <string name="userAgent">sami515</string>
     <int name="recipientLimit">-1</int>
     <int name="smsToMmsTextThreshold">4</int>
     <string name="emailGatewayNumber">6245</string>
@@ -36,4 +36,6 @@
     <bool name="SubjectSMS">true</bool>
     <bool name="International_SMS_Guard">true</bool>
     <bool name="enableSprintVVM">true</bool>
+    <!-- Flag indicating whether Transaction ID should be enabled -->
+    <bool name="enabledTransID">true</bool>
 </mms_config>
