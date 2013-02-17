@@ -13,7 +13,17 @@ net.ppp0.dns2=8.8.4.4
 net.dns1=8.8.8.8
 net.dns2=8.8.4.4
 
-#scrolling
+#VM build.props
+gsm.operator.alpha=Virgin Mobile
+gsm.operator.numeric=311490
+ro.cdma.operator.alpha=Virgin Mobile
+ro.cdma.operator.numeric=311490
+ro.cdma.home.operator.alpha=Virgin Mobile
+ro.cdma.home.operator.numeric=311490
+net.cdma.pppd.user=user LGTelecom
+ro.carrier=Virgin Mobile
+
+#Scrolling
 windowsmgr.max_events_per_sec=180
 ro.tvout.enable=true
 net.streaming.rtsp.uaprof=http://wap.samsungmobile.com/uaprof/
