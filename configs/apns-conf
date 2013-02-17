@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 /*
-** Copyright 2011, The CyanogenMod Project
+** Copyright 2006, Google Inc.
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -17,11 +17,17 @@
 */
 -->
 
-<resources>
-    <!-- Allows setting video size before recording starts -->
-    <bool name="needsEarlyVideoSize">true</bool>
-    <!-- Samsung Camcorder Mode -->
-    <bool name="needsSamsungCamMode">true</bool>
-    <!-- Samsung Camera Settings -->
-    <bool name="hasSamsungCamSettings">true</bool>
-</resources>
+<!-- use empty string to specify no proxy or port -->
+<!-- This version must agree with that in apps/common/res/apns.xml -->
+<apns version="7">
+    <apn carrier="vmobl"
+         mcc="311"
+         mnc="490"
+         apn="vmobl"
+         user="vmobl"
+         server="*"
+         password="*"
+         mmsc="http://mmsc.vmobl.com:8088/mms?"
+         authtype="3"
+    />
+</apns>

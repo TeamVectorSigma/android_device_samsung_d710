@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2012 The CyanogenMod Project
+# Copyright (C) 2012 The Carbon Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,27 +15,25 @@
 # limitations under the License.
 #
 
-## Specify phone tech before including full_phone
-$(call inherit-product, vendor/cna/config/cdma.mk)
-
-# Release name
-PRODUCT_RELEASE_NAME := SPH-D710
-
-# Bootanimation
-TARGET_SCREEN_HEIGHT := 800
-TARGET_SCREEN_WIDTH := 480
-
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cna/config/common_full_phone.mk)
-
-# Inherit device configuration
+# device
 $(call inherit-product, device/samsung/d710/full_d710.mk)
 
-## Device identifier. This must come after all inclusions
+# cdma
+$(call inherit-product, vendor/carbon/config/common_cdma.mk)
+
+# carbonjoy
+$(call inherit-product, vendor/carbon/config/common.mk)
+
+# phone
+$(call inherit-product, vendor/carbon/config/common_phone.mk)
+
+# products
+PRODUCT_NAME := carbon_d710
 PRODUCT_DEVICE := d710
-PRODUCT_NAME := cna_d710
-PRODUCT_BRAND := Samsung
-PRODUCT_MODEL := SPH-D710 
+PRODUCT_BRAND := samsung
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_MODEL := SPH-D710
+PRODUCT_PROPERTY_OVERRIDES += ro.buildzipid=carbon.d710.$(shell date +%m%d%y).$(shell date +%H%M%S)
 
 #Set build fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 TARGET_DEVICE=SPH-D710 BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.1.2/JZO54K/FL16:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.1.2 JZ054K FL16 release-keys"

@@ -18,13 +18,16 @@ LOCAL_PATH := device/samsung/d710
 PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
     $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
-    $(LOCAL_PATH)/init.rc:root/init.rc \
     $(LOCAL_PATH)/fstab.smdk4210:root/fstab.smdk4210 \
     $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
+
+# Sensors
+#PRODUCT_PACKAGES += \
+#    sensors.exynos4
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -67,6 +70,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
 
+# Fix USB transfer speeds
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.umsdirtyratio=20
+
 # Net
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
@@ -76,19 +83,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/Volume.db:system/etc/Volume.db \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf \
-    $(LOCAL_PATH)/configs/asound.conf:system/etc/asound.conf \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/configs/apns-conf:system/etc/apns-conf \
+    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
 
 # Packages
 PRODUCT_PACKAGES := \
     GalaxyS2Settings \
-    smdk4210_hdcp_keys \
-    Trebuchet
+    smdk4210_hdcp_keys
 
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.exynos4
 
 # WIMAX
 PRODUCT_PACKAGES += \
@@ -127,7 +129,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2 \
     ro.telephony.call_ring.multiple=false \
     ro.telephony.call_ring.delay=0 \
-    ro.config.vc_call_vol_steps=8 \
     hwui.render_dirty_regions=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
