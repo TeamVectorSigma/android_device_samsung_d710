@@ -382,6 +382,12 @@ on property:ril.cdma.data_state=0
     setprop status.battery.level_raw  50
     setprop status.battery.level_scale 9
 
+# For RIL
+service cpboot-daemon /sbin/cbd -d -p 8
+    class main
+    user root
+    group radio cache inet misc audio sdcard_rw log sdcard_r
+
 # bluetooth mac address
 service bdaddr /system/bin/bdaddr_read
     class main
@@ -447,14 +453,6 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-
-# TVout
-service TvoutService_C /system/bin/bintvoutservice
-     class main
-     user system
-     group graphics
-on property:ro.tvout.enable=false
-    stop TvoutService_C
 
 service immvibed /system/bin/immvibed
     class core
