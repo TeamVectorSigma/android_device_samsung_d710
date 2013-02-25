@@ -19,6 +19,13 @@ package com.cyanogenmod.settings.device;
 import android.util.Log;
 
 import java.io.File;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,10 +46,40 @@ public class Utils {
      * @param filename The filename
      * @param value The value
      */
-    public static void writeValue(String filename, String value) {
+ public static void writeValue(String filename, String value) {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(filename), false);
+            fos.write(value.getBytes());
+            fos.flush();
+            // fos.getFD().sync();
+        } catch (FileNotFoundException ex) {
+            Log.w(TAG, "file " + filename + " not found: " + ex);
+        } catch (SyncFailedException ex) {
+            Log.w(TAG, "file " + filename + " sync failed: " + ex);
+        } catch (IOException ex) {
+            Log.w(TAG, "IOException trying to sync " + filename + ": " + ex);
+        } catch (RuntimeException ex) {
+            Log.w(TAG, "exception while syncing file: ", ex);
+        } finally {
+            if (fos != null) {
+                try {
+                    Log.w(TAG_WRITE, "file " + filename + ": " + value);
+                    fos.close();
+                } catch (IOException ex) {
+                    Log.w(TAG, "IOException while closing synced file: ", ex);
+                } catch (RuntimeException ex) {
+                    Log.w(TAG, "exception while closing file: ", ex);
+                }
+            }
+        }
+
+    }
+
+public static void writeValue(String filename, String value, Boolean append) {
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(new File(filename), append);
             fos.write(value.getBytes());
             fos.flush();
             // fos.getFD().sync();

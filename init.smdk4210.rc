@@ -1,13 +1,18 @@
 import init.smdk4210.usb.rc
 import init.gps.rc
 
-on early-init
+on init
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
-    mkdir /storage 0775 system system
-    mkdir /storage/sdcard0 0775 system system
-    mkdir /storage/sdcard1 0775 system system
-    mkdir /storage/usbdisk0 0775 system system
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/sdcard0 0000 system system
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /storage/usbdisk0 0000 system system
+    mkdir /storage/usbdisk1 0000 system system
+    mkdir /storage/usbdisk2 0000 system system
+    mkdir /storage/usbdisk3 0000 system system
+    mkdir /storage/usbdisk4 0000 system system
+    mkdir /storage/usbdisk5 0000 system system
     mkdir /efs 0771 radio system
     mkdir /preload 0771 system system
     mkdir /mnt 0775 root system
@@ -16,35 +21,32 @@ on early-init
     # for backwards compatibility
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-    symlink /storage/sdcard1 /extSdCard
-    symlink /storage/sdcard1 /mnt/extSdCard
+    symlink /storage/sdcard1 /external_sd
+    symlink /storage/sdcard1 /mnt/external_sd
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
+    symlink /storage/usbdisk1 /usbdisk1
+    symlink /storage/usbdisk1 /mnt/usbdisk1
+    symlink /storage/usbdisk2 /usbdisk2
+    symlink /storage/usbdisk2 /mnt/usbdisk2
+    symlink /storage/usbdisk3 /usbdisk3
+    symlink /storage/usbdisk3 /mnt/usbdisk3
+    symlink /storage/usbdisk4 /usbdisk4
+    symlink /storage/usbdisk4 /mnt/usbdisk4
+    symlink /storage/usbdisk5 /usbdisk5
+    symlink /storage/usbdisk5 /mnt/usbdisk5
 
 # Disable CFQ slice idle delay
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
 
-# FIXME: permissions for tvout
-    chmod 0777 /dev/graphics/fb0
-    chmod 0777 /dev/graphics/fb10
-    chmod 0777 /dev/graphics/fb11
-    chown media graphics /sys/class/switch/hdmi
-    chmod 0777 /sys/class/switch/hdmi
+on init
 
-# FIXME: permission for HDMI audio path
-    chown media audio /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
-    chmod 0777 /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
+# Vibetonz
+    export VIBE_PIPE_PATH /dev/pipes
+    mkdir /dev/pipes 0771 shell shell
 
 on fs
-# mount ext4 partitions
-    mount ext4 /dev/block/mmcblk0p9 /system noatime wait ro
-    mount ext4 /dev/block/mmcblk0p7 /cache nosuid nodev noatime wait
-    mount ext4 /dev/block/mmcblk0p10 /data nosuid nodev noatime wait noauto_da_alloc
-    mount ext4 /dev/block/mmcblk0p12 /preload nosuid nodev noatime wait
-    
-    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
-    mkdir /efs/bluetooth
-    mkdir /efs/wifi
+    mount_all /fstab.smdk4210
     chown radio system /efs/bluetooth
     chown radio system /efs/wifi
     chmod 0775 /efs/bluetooth
@@ -56,8 +58,10 @@ on fs
 
 on post-fs-data
 # insmod kernel modules
+    insmod /system/lib/modules/cyasswitch.ko
     insmod /system/lib/modules/j4fs.ko
-    
+    insmod /system/lib/modules/scsi_wait_scan.ko
+
 # mount param.lfs
     mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs
 
@@ -71,8 +75,8 @@ on post-fs-data
     chmod 0664 /sys/class/sec/gps/GPS_PWR_EN/value
     chown root system /sys/class/sec/gps/GPS_nRST/value
     chmod 0664 /sys/class/sec/gps/GPS_nRST/value
-    mkdir /data/gps 771 gps system
-    chown gps system /data/gps
+    mkdir /data/gps 771 system system
+    chown system system /data/gps
 
     # give system access to wpa_supplicant.conf for backup and restore
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -81,12 +85,8 @@ on post-fs-data
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-	
-	mkdir /data/snd 0777 audio audio
-	chmod 0777 /data/snd
-	chown audio audio /data/snd
-	
-#DRM directory creation
+
+# DRM directory creation
     mkdir /system/etc/security/.drm 0775
     chown root root /system/etc/security/.drm
     chmod 0775 /system/etc/security/.drm
@@ -128,8 +128,27 @@ on post-fs-data
     setprop ro.nfc.port "I2C"
     chmod 0600 /dev/pn544
     chown nfc nfc /dev/pn544
-	
-   #permissions for dpram
+
+# setup for alsa snd device
+    chmod 0770 /dev/snd/pcmC0D0c
+    chmod 0770 /dev/snd/pcmC0D0p
+    chmod 0770 /dev/snd/controlC0
+    chmod 0770 /dev/snd/timer
+    chmod 0770 /dev/snd/hwC0D0
+
+# create log system
+    mkdir /data/log 0775 system log
+    chown system log /data/log
+
+    chmod 0775 /data/log
+    chmod 0775 /data/anr
+
+#  panorama directory creation
+    mkdir /data/pxtmpdir 0775
+    chown system system /data/pxtmpdir
+    chmod 0775 /data/pxtmpdir
+
+#  permissions for dpram
     chmod 0666 /dev/dpram0
     chmod 0666 /dev/dpram1
     chmod 0666 /dev/dpramerr
@@ -139,34 +158,11 @@ on post-fs-data
     chown radio radio /dev/dpram1
     chown radio radio /dev/ttyCPLOG0
 
-# setup for alsa snd device
-    chmod 0770 /dev/snd/pcmC0D0c
-    chmod 0770 /dev/snd/pcmC0D0p
-    chmod 0770 /dev/snd/controlC0
-    chmod 0770 /dev/snd/timer
-    chmod 0770 /dev/snd/hwC0D0
-
-    # create log system
-    mkdir /data/log 0775 system log
-    chown system log /data/log
-
-    chmod 0775 /data/log
-    chmod 0775 /data/anr
-	
-	mkdir /data/snd 0775 system system
-	chown system system /data/snd
-	chmod 0755 /data/snd
-
-#panorama directory creation
-    mkdir /data/pxtmpdir 0775
-    chown system system /data/pxtmpdir
-    chmod 0775 /data/pxtmpdir
-
-    # permission for HDMI audio path
+# permission for HDMI audio path
     chown media audio /sys/class/hdmi_audio/hdmi_audio/hdmi_audio_set_ext
 
 # Permissions for gpio_keys.
-    chown system radio /sys/class/sec/sec_key/wakeup_keys 
+    chown system radio /sys/class/sec/sec_key/wakeup_keys
     write /sys/class/sec/sec_key/wakeup_keys  102,116
 
 # Add permission for ATM. 2010.03.20
@@ -191,10 +187,19 @@ on post-fs-data
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_vfocv
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_soc
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_vol
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_current_now
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_temp_radc
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/batt_tmu_status
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/current_avg
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/fg_soc
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/siop_activated
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/slate_test_mode
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/hotspot
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/data_call
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/call
     chown system radio /sys/devices/platform/sec-battery/power_supply/battery/wimax
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/browser
+    chown system radio /sys/devices/platform/sec-battery/power_supply/battery/camera
 
     chown system system /sys/class/backlight/panel/brightness
     chown system system /sys/class/power_supply/battery/temp
@@ -237,24 +242,23 @@ on post-fs-data
 
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_panel
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_version_phone
-    chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status 
-    chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update 
+    chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update_status
+    chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_firm_update
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_threshold
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_config_version
     chown system radio /sys/devices/virtual/sec/sec_touchscreen/tsp_touchtype
-	
-	chown system system /sys/class/leds/red/trigger
-	chown system system /sys/class/leds/blue/trigger
-	chown system system /sys/class/leds/green/trigger
+
+    chown system system /sys/class/leds/red/trigger
+    chown system system /sys/class/leds/blue/trigger
 
 # Permissions for bluetooth
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /dev/ttySAC0
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown bluetooth bluetooth /dev/ttySAC0
     chmod 0600 /dev/ttySAC0
     chmod 0660 /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
 
 # Vibetonz
     chmod 0660 /dev/tspdrv
@@ -284,7 +288,9 @@ on post-fs-data
     chown system radio /sys/class/sec/switch/adc_debounce_time
     chown system radio /sys/class/sec/switch/status
     chown system radio /sys/class/sec/switch/adc
+    chown system radio /sys/class/sec/switch/set_usb_path
     chown system radio /mnt/.lfs/sw_sel
+    chown system radio /sys/devices/platform/s3c2410-i2c.5/i2c-5/5-0066/max8997-muic/usb_sel
 
 # Permissions for OTG Test
     chown system radio /sys/class/host_notify/usb_otg/booster
@@ -293,7 +299,7 @@ on post-fs-data
 # Permission for radio
     chown system radio /sys/devices/platform/s5p-ehci/ehci_power
     chown system radio /sys/devices/platform/s5p-ehci/ehci_runtime
-    chown system radio /sys/devices/virtual/misc/multipdp/waketime    
+    chown system radio /sys/devices/virtual/misc/multipdp/waketime
 
 # for datarouter
     chown system system /dev/dun
@@ -322,13 +328,7 @@ on post-fs-data
     chown system system /sys/power/cpufreq_min_limit
     chmod 0660 /sys/power/cpufreq_max_limit
     chmod 0660 /sys/power/cpufreq_min_limit
-	
-on property:ril.cdma.data_state=1
-	restart pppd_cdma
 
-on property:ril.cdma.data_state=0
-    stop pppd_cdma
-	
     chown system system /sys/power/gpu_lock
     chmod 0660 /sys/power/gpu_lock
 
@@ -339,22 +339,41 @@ on property:ril.cdma.data_state=0
     chown radio system /sys/devices/virtual/accelerometer/accelerometer/acc_file
     chown radio system /sys/devices/virtual/sec/gsensorcal/calibration
 
+# Define TCP buffer sizes for various networks
+#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.wifi    524288,1048576,2097152,262144,524288,1048576
+    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
+    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
+    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
+    setprop net.tcp.buffersize.evdo_b  4094,87380,262144,4096,16384,262144
+    setprop net.tcp.buffersize.wimax   4096,524288,1048576,4096,16384,110208
+
 # for device encryption
     setprop vold.post_fs_data_done 1
+
+# allow system to modify cpufreq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-    setprop ro.build.product SPH-D710
-    setprop ro.product.device SPH-D710
     setprop ro.radio.noril yes
 
-# permissions for NFC
-    setprop ro.nfc.port "I2C"
-    chmod 0600 /dev/pn544
-    chown nfc nfc /dev/pn544
+on property:ril.cdma.data_state=1
+    restart pppd_cdma
 
-# Device Encryption by B2B Security Lab. 
+on property:ril.cdma.data_state=0
+    stop pppd_cdma
+
+    setprop wifi.interface wlan0
+
+# Device Encryption by B2B Security Lab.
     setprop ro.crypto.keyfile.userdata /efs/metadata
 
 # fake some battery state
@@ -362,88 +381,41 @@ on boot
     setprop status.battery.level 5
     setprop status.battery.level_raw  50
     setprop status.battery.level_scale 9
-	
-    setprop net.tcp.buffersize.wimax   4096,87380,256960,4096,16384,256960
-	
-# +++++++++++++++++++++++++++++++++++++++++++
-# for datarouter
-    chown system system /dev/ttyGS0
-    chown system system /dev/dun
-# +++++++++++++++++++++++++++++++++++++++++++
 
-# USB HUB : system properties are linked with sysfs
-#  bit :    3     2      1         0
-#          AP,   CP, WIMAX, RESERVED
-# Enable AP, CP, WIMAX
-
-on property:persist.service.usb.hubport=0
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
-on property:persist.service.usb.hubport=2
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path ALL
-on property:persist.service.usb.hubport=4
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
-on property:persist.service.usb.hubport=6
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_ap
-	write /sys/class/sec/switch/set_usb_path AP
-on property:persist.service.usb.hubport=8
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
-on property:persist.service.usb.hubport=10
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enalbe_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-	write /sys/class/sec/switch/set_usb_path CP
-on property:persist.service.usb.hubport=12
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port enable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-on property:persist.service.usb.hubport=14
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_wimax
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_cp
-	write /sys/devices/platform/i2c-gpio.17/i2c-17/17-0008/port disable_ap
-
-#SISO Data Call Changes S
-service pppd_cdma /system/bin/pppd_runner
-   user root
-   group radio cache inet misc system
-   disabled
-   oneshot
-#SISO Data Call Changes E
-	
-service p2p_supplicant /system/bin/wpa_supplicant \
-    -Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin 
-    # we will start as root and wpa_supplicant will switch to user wifi
-    # after setting up the capabilities required for WEXT
-    # user wifi
-    # group wifi inet keystore
+# For RIL
+service cpboot-daemon /sbin/cbd -d -p 8
     class main
-    socket wpa_wlan0 dgram 660 wifi wifi
+    user root
+    group radio cache inet misc audio sdcard_rw log sdcard_r
+
+# bluetooth mac address
+service bdaddr /system/bin/bdaddr_read
+    class main
+    user root
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant \
-	-Dnl80211 -iwlan0 -puse_p2p_group_interface=1 -c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
-    # we will start as root and wpa_supplicant will switch to user wifi
-    # after setting up the capabilities required for WEXT
-    # user wifi
-    # group wifi inet keystore
-	class main
-	socket wpa_wlan0 dgram 660 wifi wifi
-	disabled
-	oneshot
+# Wimax changes
+service dhcpcd_uwbr0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_uwbr0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+# Bluetooth PAN
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
     class main
@@ -464,50 +436,63 @@ service iprenew_p2p /system/bin/dhcpcd -n
     class main
     disabled
     oneshot
-	
-# Wimax changes
-service dhcpcd_uwbr0 /system/bin/dhcpcd -ABKL
+
+service p2p_supplicant /system/bin/wpa_supplicant \
+    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -N \
+    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -e/data/misc/wifi/entropy.bin \
+    -puse_p2p_group_interface=1
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service wpa_supplicant /system/bin/wpa_supplicant \
+    -Dnl80211 -iwlan0 -e/data/misc/wifi/entropy.bin \
+    -c/data/misc/wifi/wpa_supplicant.conf
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service immvibed /system/bin/immvibed
+    class core
+    user shell
+    group shell
+    oneshot
+
+service initd /system/xbin/busybox run-parts /system/etc/init.d
+    user root
+    oneshot
+    disabled
+
+service mfgloader /system/bin/mfgloader
     class main
     disabled
     oneshot
 
-# wimax
-service iprenew_uwbr0 /system/bin/dhcpcd -n
+service macloader /system/bin/macloader
     class main
-    disabled
     oneshot
-	
+
+on property:init.svc.macloader=stopped
+    chown system root /data/.cid.info
+    chmod 0664 /data/.cid.info
+    chown system root /data/.rev
+    chmod 0660 /data/.rev
+
 service gpsd /system/bin/gpsd
     class main
     user system
     group system inet
 
-# for bluetooth
-#service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --no2bytes --tosleep 50000 \
-#    --baudrate 3000000 --use_baudrate_for_download --patchram /system/bin/bcm4330B1.hcd \
-#    --scopcm=0,0,0,0,0,0,0,3,3,0  /dev/ttySAC0
-#    class main
-#    user bluetooth
-#    group bluetooth net_bt_admin
-#    disabled
-#    oneshot
-
-# bluetooth mac address
-#service bdaddr /system/bin/bdaddr_read
-#    class main
-#    user root
-#    disabled
-#    oneshot
-
-# TVout
-service TvoutService_C /system/bin/bintvoutservice
-     class main
-     user system
-     group graphics 
-     
-# bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/bugmailer.sh -v
+service wimax_route /system/bin/route add default dev uwbr0
     class main
     disabled
     oneshot
-    keycodes 114 115 116
+
+service pppd_cdma /system/bin/pppd_runner
+    class main
+    user root
+    group radio cache inet misc system
+    disabled
+    oneshot
