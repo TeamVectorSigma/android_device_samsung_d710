@@ -43,7 +43,6 @@ public class DockFragmentActivity extends PreferenceFragment {
 
         addPreferencesFromResource(R.xml.dock_preferences);
         PreferenceScreen prefSet = getPreferenceScreen();
-
     }
 
     @Override
@@ -60,7 +59,6 @@ public class DockFragmentActivity extends PreferenceFragment {
             i.putExtra("data", boxValue);
             ActivityManagerNative.broadcastStickyIntent(i, null, UserHandle.USER_ALL);
         }
-
         return true;
     }
 
@@ -70,7 +68,5 @@ public class DockFragmentActivity extends PreferenceFragment {
         Intent i = new Intent("com.cyanogenmod.settings.SamsungDock");
         i.putExtra("data", (dockAudio? "1" : "0"));
         ActivityManagerNative.broadcastStickyIntent(i, null, UserHandle.USER_ALL);
-
     }
-
 }
