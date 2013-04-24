@@ -19,6 +19,3 @@ ro.tvout.enable=true
 net.streaming.rtsp.uaprof=http://wap.samsungmobile.com/uaprof/
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
-dalvik.vm.heapstartsize=5m
-dalvik.vm.heapgrowthlimit=48m
-dalvik.vm.heapsize=128m

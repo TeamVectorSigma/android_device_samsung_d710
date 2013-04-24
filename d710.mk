@@ -16,10 +16,9 @@ LOCAL_PATH := device/samsung/d710
 
 # Init files
 PRODUCT_COPY_FILES := \
-    $(LOCAL_PATH)/init.smdk4210.rc:root/init.smdk4210.rc \
-    $(LOCAL_PATH)/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
-    $(LOCAL_PATH)/fstab.smdk4210:root/fstab.smdk4210 \
-    $(LOCAL_PATH)/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
+    $(LOCAL_PATH)/rootdir/init.smdk4210.rc:root/init.smdk4210.rc \
+    $(LOCAL_PATH)/rootdir/init.smdk4210.usb.rc:root/init.smdk4210.usb.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4210.rc:root/ueventd.smdk4210.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -55,15 +54,16 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ip-up:system/etc/ppp/ip-up \
     $(LOCAL_PATH)/configs/ip-down:system/etc/ppp/ip-down
 
+#GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/Volume.db:system/etc/Volume.db \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf
+    $(LOCAL_PATH)/configs/sirfgps.conf:system/etc/sirfgps.conf \
+    $(LOCAL_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 
 # Packages
 PRODUCT_PACKAGES := \
     GalaxyS2Settings \
-    smdk4210_hdcp_keys
+    CellBroadcastReceiver
 
 
 # WIMAX
@@ -72,9 +72,12 @@ PRODUCT_PACKAGES += \
     WiMAXHiddenMenu \
     AngryGPS \
     SprintMenu \
-    SystemUpdateUI
+    SystemUpdateUI \
+    sensors.exynos4 
 
+# Visual Voicemail
 PRODUCT_PACKAGES += \
+    VVM_Widget \
     libhwconverter \
     libs5pjpeg \
     libfimg
@@ -127,7 +130,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=ppp0,wlan0,uwbr0 \
     ro.telephony.ril_class=SamsungCDMAv6RIL \
     ro.ril.samsung_cdma=true \
-    ro.carrier=Sprint
+    ro.carrier=Sprint \
+    ro.goo.version=$(shell date +%Y%m%d%H%M)
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -143,6 +147,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=240
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -152,8 +160,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Include common makefile
 $(call inherit-product, device/samsung/galaxys2-common/common.mk)
+
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay \
     device/samsung/galaxys2-common/overlay
 $(call inherit-product-if-exists, vendor/samsung/d710/d710-vendor.mk)
-$(call inherit-product-if-exists, vendor/common/common.mk)

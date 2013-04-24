@@ -19,11 +19,6 @@
 # by BoardConfigVendor.mk
 -include device/samsung/galaxys2-common/BoardCommonConfig.mk
 
-# Boot Animation
-TARGET_BOOTANIMATION_PRELOAD := true
-TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-BOARD_USE_SKIA_LCDTEXT := true
-
 TARGET_BOARD_INFO_FILE := device/samsung/d710/board-info.txt
 TARGET_RECOVERY_INITRC := device/samsung/d710/recovery.rc
 
@@ -53,14 +48,29 @@ BOARD_MOBILEDATA_INTERFACE_NAME := "ppp0"
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/d710/recovery/recovery_keys.c
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
-TARGET_USERIMAGES_USE_EXT4 := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_10x18.h\"
 
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/d710/include
-EXYNOS4210_ENHANCEMENTS := true
+
 # assert
 TARGET_OTA_ASSERT_DEVICE := epic4gtouch,SPH-D710,d710,smdk4210,SPH-D710VMUB,SPH-D710BST
 
 # Use the non-open-source parts, if they're present
 -include vendor/samsung/d710/BoardConfigVendor.mk
 
+# TWRP
+#TARGET_USE_O2 := true
+#TWRP Config:
+#DEVICE_RESOLUTION := 480x800
+#RECOVERY_GRAPHICS_USE_LINELENGTH := true
+#TW_INTERNAL_STORAGE_PATH := "/sdcard"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+#TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+#TW_NO_REBOOT_BOOTLOADER := true
+#TW_DEFAULT_EXTERNAL_STORAGE := false
+#TW_FLASH_FROM_STORAGE := true
+#TW_INCLUDE_INJECTTWRP := false
+#TW_HAS_DOWNLOAD_MODE := true
+#TW_INCLUDE_INJECTTWRP := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/d710/shbootimg.mk

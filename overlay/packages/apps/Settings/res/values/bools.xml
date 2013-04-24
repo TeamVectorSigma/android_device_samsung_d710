@@ -17,4 +17,6 @@
 <resources>
     <!-- Additional System Update menu(Update PRL, Update Profile) is displayed if it is true -->
     <bool name="config_additional_system_update_setting_enable">true</bool>
+    <!-- Whether or not the dock settings are to be displayed for this device when docked -->
+    <bool name="has_dock_settings">true</bool>
 </resources>

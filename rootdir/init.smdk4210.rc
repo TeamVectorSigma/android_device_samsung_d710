@@ -4,15 +4,10 @@ import init.gps.rc
 on init
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
-    mkdir /storage 0550 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
-    mkdir /storage/usbdisk0 0000 system system
-    mkdir /storage/usbdisk1 0000 system system
-    mkdir /storage/usbdisk2 0000 system system
-    mkdir /storage/usbdisk3 0000 system system
-    mkdir /storage/usbdisk4 0000 system system
-    mkdir /storage/usbdisk5 0000 system system
+    mkdir /storage 0775 system system
+    mkdir /storage/sdcard0 0775 system system
+    mkdir /storage/sdcard1 0775 system system
+    mkdir /storage/usbdisk0 0775 system system
     mkdir /efs 0771 radio system
     mkdir /preload 0771 system system
     mkdir /mnt 0775 root system
@@ -25,21 +20,9 @@ on init
     symlink /storage/sdcard1 /mnt/external_sd
     symlink /storage/usbdisk0 /usbdisk0
     symlink /storage/usbdisk0 /mnt/usbdisk0
-    symlink /storage/usbdisk1 /usbdisk1
-    symlink /storage/usbdisk1 /mnt/usbdisk1
-    symlink /storage/usbdisk2 /usbdisk2
-    symlink /storage/usbdisk2 /mnt/usbdisk2
-    symlink /storage/usbdisk3 /usbdisk3
-    symlink /storage/usbdisk3 /mnt/usbdisk3
-    symlink /storage/usbdisk4 /usbdisk4
-    symlink /storage/usbdisk4 /mnt/usbdisk4
-    symlink /storage/usbdisk5 /usbdisk5
-    symlink /storage/usbdisk5 /mnt/usbdisk5
 
 # Disable CFQ slice idle delay
     write /sys/block/mmcblk0/queue/iosched/slice_idle 0
-
-on init
 
 # Vibetonz
     export VIBE_PIPE_PATH /dev/pipes

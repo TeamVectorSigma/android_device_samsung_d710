@@ -16,7 +16,10 @@
 #
 
 # name
-PRODUCT_RELEASE_NAME := d710
+PRODUCT_RELEASE_NAME := SPH-D710
+
+#PRODUCT_PACKAGES += \
+    Camera
 
 # device
 $(call inherit-product-if-exists, device/samsung/d710/full_d710.mk)
@@ -40,4 +43,9 @@ PRODUCT_MODEL := SPH-D710
 PRODUCT_PROPERTY_OVERRIDES += ro.buildzipid=carbon.d710.$(shell date +%m%d%y).$(shell date +%H%M%S)
 
 #Set build fingerprint
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 TARGET_DEVICE=SPH-D710 BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.1.2/JZO54K/FL16:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.1.2 JZ054K FL16 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=SPH-D710 TARGET_DEVICE=SPH-D710 BUILD_FINGERPRINT=samsung/SPH-D710/SPH-D710:4.1.2/JZO54K/SPH-D710.GB27:user/release-keys PRIVATE_BUILD_DESC="SPH-D710-user 4.1.2 JZO54K SPH-D710.GB27 release-keys"
+
+# default.prop
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    persist.sys.strictmode.disable=true
+
